@@ -2,7 +2,7 @@
 
 ### Ready to use Browser Images
  Available images:
-![Browsers List](docs\pageScreen.jpg)
+![Browsers List](docs/pageScreen.jpg)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.2.
 
