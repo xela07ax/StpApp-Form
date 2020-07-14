@@ -3,6 +3,23 @@
 ### Ready to use Browser Images
  Available images:
 ![Browsers List](docs/pageScreen.jpg)
+## Backend
+
+```sh
+    npm install
+```
+
+## Run
+```sh
+    node app.js
+```
+Output:
+```
+Running at Port 3036
+```
+
+Open page: http://localhost:3036/
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.2.
 
