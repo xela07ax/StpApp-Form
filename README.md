@@ -6,6 +6,7 @@
 ## Backend
 
 ```sh
+    cd Backend
     npm install
 ```
 
