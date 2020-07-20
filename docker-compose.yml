@@ -1,0 +1,8 @@
+version: "2.4"
+
+services:
+  webapp:
+    build: .
+    container_name: stp-app
+    ports:
+      - 3036:3036
