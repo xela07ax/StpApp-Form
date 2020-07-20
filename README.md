@@ -2,7 +2,7 @@
 
 ### Ready to use Browser Images
  Available images:
-![Browsers List](docs/pageScreen.jpg)
+![Browsers List](docs/pageScreen.jpg =250x)
 ## Backend
 
 ```sh
