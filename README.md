@@ -60,10 +60,10 @@ docker stop selenoid
 docker rm -f selenoid
 docker start selenoid
 ```
-Установим Selrnoid без локальной cm - Источник <https://habr.com/ru/post/327184//> 
 
 ### Запуск Селенойда
-Источник <https://habr.com/ru/post/327184//> 
+Установим Selenoid без локальной cm - Источник <https://habr.com/ru/post/327184//> 
+
 Создать каталог для хранения конфигурации Selenoid и сгенерировать конфигурационный файл:
 ```sh
 mkdir -p /home/sakuldodo/Projects/selenoid_cfg
