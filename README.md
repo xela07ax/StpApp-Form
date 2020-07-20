@@ -2,7 +2,9 @@
 
 ## Image source
 `Available images:`
-<img src="docs/_pageScreen.jpg" width="150" >
+<a href="docs/pageScreen.jpg" rel="some text">
+  <img src="docs/_pageScreen.jpg" width="150" >
+</a>
 
 ## Backend
 
