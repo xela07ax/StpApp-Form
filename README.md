@@ -1,8 +1,8 @@
 # StpApp
 
-### Ready to use Browser Images
- Available images:
-![drawing](docs/_pageScreen.jpg)
+## Image source
+`Available images:`
+<img src="docs/_pageScreen.jpg" width="150" >
 
 ## Backend
 
