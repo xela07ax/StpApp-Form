@@ -35,7 +35,11 @@ docker-compose up
 ```sh
 docker build . -t stp-app-img
 # Запустим и присоединимся к контейнеру, для запуска в нем команд
-docker run -it --name proxy-stp -p 3036:3036 stp-app-img bash
+docker run -d --name proxy-stp -p 3036:3036 stp-app-img bash
+# docker rm -f proxy-stp
+# Или запустим контейнер для работы
+docker run -d --name stp-app -p 3036:3036 stp-app-img
+# docker rm -f stp-app
 # Тест ответа
 >curl http://localhost:3036
 >exit
