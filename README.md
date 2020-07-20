@@ -37,58 +37,18 @@ docker build . -t stp-app-img
 # Запустим и присоединимся к контейнеру, для запуска в нем команд
 docker run -d --name proxy-stp -p 3036:3036 stp-app-img bash
 # docker rm -f proxy-stp
-# Или запустим контейнер для работы
+# Или запустим контейнер для работы, имя контейнеру при запуске: stp-app
 docker run -d --name stp-app -p 3036:3036 stp-app-img
 # docker rm -f stp-app
-# Тест ответа
+
+# Тест
 >curl http://localhost:3036
 >exit
 # Удаление контейнера и образа
+docker rm -f proxy-stp stp-app
 docker image rm -f stp-app-img stpapp-form_webapp
 ```
 
-
-## Run Selenoid linked
-
-Даём имя контейнеру при запуске: stp-app
-```sh
-# docker container rm -f stp-app
-docker build . -t stp-app-img
-docker run -d --name stp-app stp-app-img
-```
-
-Теперь мы можем ссылаться на этот контейнер по имени stp-app.
-
-Самое интересное в этой строчке: --link name:alias. name — имя контейнера, alias — имя, под которым этот контейнер будет известен запускаемому.
-### Запускаем второй контейнер, связывая его с первым: 
-Источник <https://habr.com/ru/post/327184//> 
-
-Очистим систему от старого Селенойда
-```sh
-# Просмотр параметров текущего экземпляра
-docker container inspect selenoid
-# Очистим систему от старого Селенойда
-docker rm -f selenoid
-# Запустить линкованный Selenoid:
-docker run -d --name selenoid -p 4444:4444 -v /home/droid/.aerokube/selenoid:/etc/selenoid:ro \
--v /var/run/docker.sock:/var/run/docker.sock       \
--v /home/droid/.aerokube/selenoid/video:/opt/selenoid/video \
--v /home/droid/.aerokube/selenoid/logs:/opt/selenoid/logs \
---link stp-app:stp-app  \
-aerokube/selenoid      
-```
-
-### Тест
-```sh
-# Подключимся к запущенному селенойду
-docker container exec -it selenoid sh
-# Информация о системе
-cat /etc/os-release
-# Установить curl в Alpine Linux из командной строки:
-apk --no-cache add curl
-# Посмотрим ответ приложнения
-curl http://stp-app:3036
-```
 
 ## Development server
 
