@@ -75,26 +75,20 @@ aerokube/selenoid
 ```
 
 ### Тест
-Подключимся к запущенному селенойду
 ```sh
+# Подключимся к запущенному селенойду
 docker container exec -it selenoid sh
-```
-Информация о системе
-```sh
+# Информация о системе
 cat /etc/os-release
-```
-Установить curl в Alpine Linux из командной строки:
-Источник <https://www.shellhacks.com/ru/alpine-install-curl/> 
-```sh
+# Установить curl в Alpine Linux из командной строки:
 apk --no-cache add curl
-```
-Посмотрим ответ приложнения
+# Посмотрим ответ приложнения
 curl http://stp-app:3036
-
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.2.
+```
 
 ## Development server
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.2.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
