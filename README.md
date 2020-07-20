@@ -46,8 +46,7 @@ docker run -it --name proxy-stp -p 3036:3036 stp-app-img bash
 ```
 Тест
 ```sh
->curl http://localhost:3036
->exit
+curl http://localhost:3036
 ```
 Удаление контейнера и образа
 ```sh
