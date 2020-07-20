@@ -32,19 +32,25 @@ docker-compose up
 ```
 
 ### Docker
+
+Background runing
+```sh
+docker build . -t stp-app-img
+docker run -d --name stp-app -p 3036:3036 stp-app-img
+```
+or interactive 
 ```sh
 docker build . -t stp-app-img
 # Запустим и присоединимся к контейнеру, для запуска в нем команд
-docker run -d --name proxy-stp -p 3036:3036 stp-app-img bash
-# docker rm -f proxy-stp
-# Или запустим контейнер для работы, имя контейнеру при запуске: stp-app
-docker run -d --name stp-app -p 3036:3036 stp-app-img
-# docker rm -f stp-app
-
-# Тест
+docker run -it --name proxy-stp -p 3036:3036 stp-app-img bash
+```
+Тест
+```sh
 >curl http://localhost:3036
 >exit
-# Удаление контейнера и образа
+```
+Удаление контейнера и образа
+```sh
 docker rm -f proxy-stp stp-app
 docker image rm -f stp-app-img stpapp-form_webapp
 ```
