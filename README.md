@@ -1,19 +1,19 @@
 # StpApp
 
-## Image source
+### Image source
 `Available images:`
 <a href="docs/pageScreen.jpg" rel="some text">
   <img src="docs/_pageScreen.jpg" width="150" >
 </a>
 
-## Backend
+### Backend
 
 ```sh
     cd Backend
     npm install
 ```
 
-# Run simple
+## Run simple
 ```sh
     node app.js
 ```
@@ -24,7 +24,7 @@ Running at Port 3036
 
 Open page: http://localhost:3036/
 
-# Run Docker 
+## Run Docker 
 
 ### Compose
 ```sh
@@ -44,7 +44,7 @@ docker image rm -f stp-app-img stpapp-form_webapp
 ```
 
 
-# Run Selenoid linked
+## Run Selenoid linked
 
 Даём имя контейнеру при запуске: stp-app
 ```sh
@@ -62,7 +62,7 @@ docker start selenoid
 ```
 Установим Selrnoid без локальной cm - Источник <https://habr.com/ru/post/327184//> 
 
-## Запуск Селенойда
+### Запуск Селенойда
 Источник <https://habr.com/ru/post/327184//> 
 Создать каталог для хранения конфигурации Selenoid и сгенерировать конфигурационный файл:
 ```sh
@@ -91,7 +91,7 @@ docker run -d --name selenoid -p 4444:4444 -v /home/sakuldodo/Projects/selenoid_
       -v /var/run/docker.sock:/var/run/docker.sock aerokube/selenoid:1.1.1
 ```
 
-## Тест
+### Тест
 Подключимся к запущенному селенойду
 ```sh
 docker container exec -it selenoid sh
