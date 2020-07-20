@@ -2,8 +2,7 @@
 
 ### Ready to use Browser Images
  Available images:
-![drawing](docs/pageScreen.jpg)
-img[alt=drawing] { width: 200px; }
+![drawing](docs/_pageScreen.jpg)
 
 ## Backend
 
