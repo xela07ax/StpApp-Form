@@ -48,47 +48,30 @@ docker image rm -f stp-app-img stpapp-form_webapp
 
 Даём имя контейнеру при запуске: stp-app
 ```sh
-docker container rm -f stp-app
+# docker container rm -f stp-app
+docker build . -t stp-app-img
 docker run -d --name stp-app stp-app-img
 ```
+
 Теперь мы можем ссылаться на этот контейнер по имени stp-app.
+
 Самое интересное в этой строчке: --link name:alias. name — имя контейнера, alias — имя, под которым этот контейнер будет известен запускаемому.
 ### Запускаем второй контейнер, связывая его с первым: 
+Источник <https://habr.com/ru/post/327184//> 
+
 Очистим систему от старого Селенойда
 ```sh
-docker stop selenoid
+# Просмотр параметров текущего экземпляра
+docker container inspect selenoid
+# Очистим систему от старого Селенойда
 docker rm -f selenoid
-docker start selenoid
-```
-
-### Запуск Селенойда
-Установим Selenoid без локальной cm - Источник <https://habr.com/ru/post/327184//> 
-
-Создать каталог для хранения конфигурации Selenoid и сгенерировать конфигурационный файл:
-```sh
-mkdir -p /home/sakuldodo/Projects/selenoid_cfg
-docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aerokube/cm:1.0.0 selenoid \
-  --last-versions 2 --tmpfs 128 --pull > /home/sakuldodo/Projects/selenoid_cfg/browsers.json
-```
-  Запустить Selenoid:
-```sh
-docker run -d --name selenoid -p 4444:4444 -v /home/sakuldodo/Projects/selenoid_cfg/:/etc/selenoid:ro \
-      -v /var/run/docker.sock:/var/run/docker.sock aerokube/selenoid:1.1.1
-```
-```sh
-docker ps
-# NAMES
-# stp-app
-# selenoid
-```
-```sh
-docker rm -f selenoid
-```
-Запустить линкованный Selenoid:
-```sh
-docker run -d --name selenoid -p 4444:4444 -v /home/sakuldodo/Projects/selenoid_cfg/:/etc/selenoid:ro \
-      --link stp-app:stp-app                          \
-      -v /var/run/docker.sock:/var/run/docker.sock aerokube/selenoid:1.1.1
+# Запустить линкованный Selenoid:
+docker run -d --name selenoid -p 4444:4444 -v /home/droid/.aerokube/selenoid:/etc/selenoid:ro \
+-v /var/run/docker.sock:/var/run/docker.sock       \
+-v /home/droid/.aerokube/selenoid/video:/opt/selenoid/video \
+-v /home/droid/.aerokube/selenoid/logs:/opt/selenoid/logs \
+--link stp-app:stp-app  \
+aerokube/selenoid      
 ```
 
 ### Тест
