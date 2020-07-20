@@ -13,7 +13,7 @@
     npm install
 ```
 
-## Run
+# Run simple
 ```sh
     node app.js
 ```
@@ -24,7 +24,7 @@ Running at Port 3036
 
 Open page: http://localhost:3036/
 
-## Run Docker 
+# Run Docker 
 
 ### Compose
 ```sh
@@ -43,6 +43,70 @@ docker run -it --name proxy-stp -p 3036:3036 stp-app-img bash
 docker image rm -f stp-app-img stpapp-form_webapp
 ```
 
+
+# Run Selenoid linked
+
+Даём имя контейнеру при запуске: stp-app
+```sh
+docker container rm -f stp-app
+docker run -d --name stp-app stp-app-img
+```
+Теперь мы можем ссылаться на этот контейнер по имени stp-app.
+Самое интересное в этой строчке: --link name:alias. name — имя контейнера, alias — имя, под которым этот контейнер будет известен запускаемому.
+### Запускаем второй контейнер, связывая его с первым: 
+Очистим систему от старого Селенойда
+```sh
+docker stop selenoid
+docker rm -f selenoid
+docker start selenoid
+```
+Установим Selrnoid без локальной cm - Источник <https://habr.com/ru/post/327184//> 
+
+## Запуск Селенойда
+Источник <https://habr.com/ru/post/327184//> 
+Создать каталог для хранения конфигурации Selenoid и сгенерировать конфигурационный файл:
+```sh
+mkdir -p /home/sakuldodo/Projects/selenoid_cfg
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aerokube/cm:1.0.0 selenoid \
+  --last-versions 2 --tmpfs 128 --pull > /home/sakuldodo/Projects/selenoid_cfg/browsers.json
+```
+  Запустить Selenoid:
+```sh
+docker run -d --name selenoid -p 4444:4444 -v /home/sakuldodo/Projects/selenoid_cfg/:/etc/selenoid:ro \
+      -v /var/run/docker.sock:/var/run/docker.sock aerokube/selenoid:1.1.1
+```
+```sh
+docker ps
+# NAMES
+# stp-app
+# selenoid
+```
+```sh
+docker rm -f selenoid
+```
+Запустить линкованный Selenoid:
+```sh
+docker run -d --name selenoid -p 4444:4444 -v /home/sakuldodo/Projects/selenoid_cfg/:/etc/selenoid:ro \
+      --link stp-app:stp-app                          \
+      -v /var/run/docker.sock:/var/run/docker.sock aerokube/selenoid:1.1.1
+```
+
+## Тест
+Подключимся к запущенному селенойду
+```sh
+docker container exec -it selenoid sh
+```
+Информация о системе
+```sh
+cat /etc/os-release
+```
+Установить curl в Alpine Linux из командной строки:
+Источник <https://www.shellhacks.com/ru/alpine-install-curl/> 
+```sh
+apk --no-cache add curl
+```
+Посмотрим ответ приложнения
+curl http://stp-app:3036
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.2.
