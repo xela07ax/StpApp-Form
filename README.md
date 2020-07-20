@@ -24,6 +24,26 @@ Running at Port 3036
 
 Open page: http://localhost:3036/
 
+## Run Docker 
+
+### Compose
+```sh
+docker-compose up
+```
+
+### Docker
+```sh
+docker build . -t stp-app-img
+# Запустим и присоединимся к контейнеру, для запуска в нем команд
+docker run -it --name proxy-stp -p 3036:3036 stp-app-img bash
+# Тест ответа
+>curl http://localhost:3036
+>exit
+# Удаление контейнера и образа
+docker image rm -f stp-app-img stpapp-form_webapp
+```
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.2.
 
